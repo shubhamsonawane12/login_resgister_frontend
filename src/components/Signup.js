@@ -1,28 +1,29 @@
-import "../css/Signup.css";
 import React, { useState } from "react";
+import { useNavigate } from 'react-router-dom';
 import Cookies from 'universal-cookie';
+import "../css/Signup.css";
 
 function Signup() {
   const [isRightPanelActive, setIsRightPanelActive] = useState(false);
   const cookies = new Cookies();
-  const [formData , setFormData] = useState({
+  const navigate = useNavigate(); // useNavigate hook
+  const [formData, setFormData] = useState({
     name: "",
     dob: "",
     email: "",
     password: "",
   });
-   const [LoginData, setLoginData] = useState({
-  
+  const [loginData, setLoginData] = useState({
     email: "",
     password: "",
   });
 
-
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
-   const handleLoginChange = (e) => {
-    setLoginData({ ...LoginData, [e.target.name]: e.target.value });
+
+  const handleLoginChange = (e) => {
+    setLoginData({ ...loginData, [e.target.name]: e.target.value });
   };
 
   const handleSignUpClick = async (e) => {
@@ -31,7 +32,7 @@ function Signup() {
 
     try {
       const response = await fetch(
-        "https://login-registration-system-backend4.onrender.com/api/auth/register ",
+        "https://login-registration-system-backend4.onrender.com/api/auth/register",
         {
           method: "POST",
           headers: {
@@ -42,45 +43,37 @@ function Signup() {
       );
       const data = await response.json();
       if (response.ok) {
-        console.log("sign_up Successful:", data);
+        console.log("Sign-up Successful:", data);
         cookies.set("token", data.token, { path: "/" });
-   // window.location.href = 'https://login-resgister-frontend1.onrender.com/Home';
-window.location.href = '/Home';
-
-
+        navigate('/Home'); // Navigate to Home after successful sign-up
       } else {
-        console.error("Sign_up error: ", data.message);
+        console.error("Sign-up error: ", data.message);
       }
     } catch (error) {
-      console.error("Sign_up failed: ", error);
+      console.error("Sign-up failed: ", error);
     }
   };
 
-
-
-   const handleSignInClick = async (e) => { 
+  const handleSignInClick = async (e) => {
     e.preventDefault();
-            setIsRightPanelActive(false);
+    setIsRightPanelActive(false);
 
     try {
       const response = await fetch(
-        "https://login-registration-system-backend4.onrender.com/api/auth/login ",
+        "https://login-registration-system-backend4.onrender.com/api/auth/login",
         {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify(LoginData),
+          body: JSON.stringify(loginData),
         }
       );
       const data = await response.json();
       if (response.ok) {
         console.log("Login Successful:", data);
         cookies.set("token", data.token, { path: "/" });
-  // window.location.href = 'https://login-resgister-frontend1.onrender.com/Home';
-window.location.href = '/Home';
-
-
+        navigate('/Home'); // Navigate to Home after successful login
       } else {
         console.error("Login error: ", data.message);
       }
@@ -89,10 +82,7 @@ window.location.href = '/Home';
     }
   };
 
-
-
   return (
-    <>
     <mainContainer>
       <div className={`container ${isRightPanelActive ? "right-panel-active" : ""}`} id="container">
         <div className="form-container sign-up-container">
@@ -137,18 +127,18 @@ window.location.href = '/Home';
           </form>
         </div>
         <div className="form-container sign-in-container">
-          <form action="#" onSubmit={handleSignInClick}>
+          <form onSubmit={handleSignInClick}>
             <div className="text_container"> 
               <h1>Log in</h1>
               <span>or use your account</span>
             </div>
-             <input 
+            <input 
               type="email" 
               name="email" 
               placeholder="Email"  
               required 
               onChange={handleLoginChange} 
-              value={LoginData.email}
+              value={loginData.email}
             />
             <input 
               type="password" 
@@ -156,7 +146,7 @@ window.location.href = '/Home';
               placeholder="Password" 
               required 
               onChange={handleLoginChange} 
-              value={LoginData.password} 
+              value={loginData.password} 
             />
             <a href="#">Forgot your password?</a>
             <button>Login</button>
@@ -181,8 +171,7 @@ window.location.href = '/Home';
           </div>
         </div>
       </div>
-      </mainContainer>
-    </>
+    </mainContainer>
   );
 }
 
