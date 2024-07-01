@@ -43,9 +43,9 @@ function Main() {
     }
   };
 
-  // if (loading) {
-  //   return <div>Loading....</div>; // Replace with your preferred loading indicator
-  // }
+  if (loading) {
+    return <div>Loading....</div>; // Replace with your preferred loading indicator
+  }
 
   console.log("userdata from main:", userData);
 
