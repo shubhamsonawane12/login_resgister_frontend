@@ -31,7 +31,7 @@ function Signup() {
 
     try {
       const response = await fetch(
-        "http://localhost:8070/api/auth/register",
+        "https://login-registration-system-backend4.onrender.com/api/auth/register ",
         {
           method: "POST",
           headers: {
