@@ -45,7 +45,7 @@ function Signup() {
         console.log("sign_up Successful:", data);
         cookies.set("token", data.token, { path: "/" });
    // window.location.href = 'https://login-resgister-frontend1.onrender.com/Home';
-window.location.href = '/Home';
+`window.location.href = '/Home'`;
 
 
       } else {
@@ -78,7 +78,7 @@ window.location.href = '/Home';
         console.log("Login Successful:", data);
         cookies.set("token", data.token, { path: "/" });
   // window.location.href = 'https://login-resgister-frontend1.onrender.com/Home';
-window.location.href = '/Home';
+`window.location.href = '/Home'`;
 
 
       } else {
