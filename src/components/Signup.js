@@ -43,7 +43,7 @@ function Signup() {
       const data = await response.json();
       if (response.ok) {
         console.log("sign_up Successful:", data);
-        cookies.set("token", data.token, { path: "/" });
+        cookies.set("token", data.token, { path: "/home" });
         window.location.href = '/home';
       } else {
         console.error("Sign_up error: ", data.message);
@@ -73,7 +73,7 @@ function Signup() {
       const data = await response.json();
       if (response.ok) {
         console.log("Login Successful:", data);
-        cookies.set("token", data.token, { path: "/" });
+        cookies.set("token", data.token, { path: "/home" });
         window.location.href = '/home';
 
       } else {
