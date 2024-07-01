@@ -54,10 +54,8 @@ function Main() {
       <Router>
         <Routes>
           <Route path="/" element={<Signup />} />
-          <Route 
-            path="/home" 
-            element={ userData ? <Home /> : <Navigate to="/" replace />} 
-          />
+         
+   <Route path="/home" element={<Signup />} />
         </Routes>
       </Router> 
     </div>
