@@ -53,11 +53,13 @@ function Main() {
     <div className='Main'>
       <Router>
         <Routes>
-          <Route path="/" element={<Signup />} />
-          <Route 
-            path="/Home" 
+            <Route path="/" component={() => <Signup/>} />
+          {/* <Route 
+            path="/home" 
             element={ userData ? <Home /> : <Navigate to="/" replace />} 
-          />
+          /> */}
+           <Route path="/Home" component={() => <Home/>} />
+                 
         </Routes>
       </Router> 
     </div>
